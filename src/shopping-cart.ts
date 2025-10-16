@@ -27,6 +27,9 @@ export class ShoppingCart {
 	}
 
 	getTotalSalesTax(subtotal: number, taxRate: number): number {
+		if (subtotal < 0) throw new Error("Subtotal must be >= 0");
+		if (taxRate < 0 || taxRate >= 100) throw new Error("Tax rate must be >= 0 and < 100");
+
 		return Math.round(subtotal * taxRate) / 100;
 	}
 
