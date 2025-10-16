@@ -22,4 +22,18 @@ describe("ShoppingCart", () => {
 		expect(items[0].product.unitPrice).toBe(39.99);
 		expect(total).toBe(199.95);
 	});
+
+	test("Step 2: Add additional Dove Soaps", () => {
+		cart.addProduct(doveSoap, 5);
+		cart.addProduct(doveSoap, 3);
+
+		const items = cart.getItems();
+		const total = cart.getTotalPrice();
+
+		expect(items.length).toBe(1);
+		expect(items[0].quantity).toBe(8);
+		expect(items[0].product.name).toBe("Dove Soap");
+		expect(items[0].product.unitPrice).toBe(39.99);
+		expect(total).toBe(319.92);
+	});
 });
