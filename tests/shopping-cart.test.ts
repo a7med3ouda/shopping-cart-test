@@ -55,7 +55,7 @@ describe("ShoppingCart", () => {
 		expect(items[1].quantity).toBe(2);
 		expect(items[1].product.name).toBe("Axe Deo");
 		expect(items[1].product.unitPrice).toBe(99.99);
-		// expect(tax).toBe(35.0); // TODO: shows error with value 34.99
-		// expect(total).toBe(314.96); // TODO: shows error with value 314.95
+		expect(tax).toBe(35.0);
+		expect(total).toBe(314.96);
 	});
 });

@@ -1,4 +1,5 @@
 import { CartItem } from "./cart-item";
+import { roundNumber } from "./helpers";
 import { Product } from "./product";
 
 export class ShoppingCart {
@@ -23,20 +24,20 @@ export class ShoppingCart {
 
 	getTotalPrice(): number {
 		const total = this.items.reduce((sum, item) => sum + item.product.unitPrice * item.quantity, 0);
-		return Math.round(total * 100) / 100;
+		return roundNumber(total);
 	}
 
 	getTotalSalesTax(subtotal: number, taxRate: number): number {
 		if (subtotal < 0) throw new Error("Subtotal must be >= 0");
 		if (taxRate < 0 || taxRate >= 100) throw new Error("Tax rate must be >= 0 and < 100");
 
-		return Math.round(subtotal * taxRate) / 100;
+		return roundNumber((subtotal * taxRate) / 100);
 	}
 
 	getTotalPriceWithSalesTax(taxRate: number) {
 		const subtotal = this.getTotalPrice();
 		const tax = this.getTotalSalesTax(subtotal, taxRate);
-		const total = Math.round((subtotal + tax) * 100) / 100;
+		const total = roundNumber(subtotal + tax);
 		return { subtotal, tax, total };
 	}
 }
