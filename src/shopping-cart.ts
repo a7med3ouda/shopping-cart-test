@@ -25,4 +25,15 @@ export class ShoppingCart {
 		const total = this.items.reduce((sum, item) => sum + item.product.unitPrice * item.quantity, 0);
 		return Math.round(total * 100) / 100;
 	}
+
+	getTotalSalesTax(subtotal: number, taxRate: number): number {
+		return Math.round(subtotal * taxRate) / 100;
+	}
+
+	getTotalPriceWithSalesTax(taxRate: number) {
+		const subtotal = this.getTotalPrice();
+		const tax = this.getTotalSalesTax(subtotal, taxRate);
+		const total = Math.round((subtotal + tax) * 100) / 100;
+		return { subtotal, tax, total };
+	}
 }
